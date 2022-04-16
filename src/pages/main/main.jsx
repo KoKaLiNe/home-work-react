@@ -7,9 +7,9 @@ import { AppRoute } from "../../const";
 const Main = () => {
     return (
         <React.Fragment>
-            <Header mode={AppRoute.MAIN}/>
+            <Header mode={AppRoute.MAIN} />
             <section className="main__wrapper">
-                <Filter />
+                <Filter mode={AppRoute.MAIN} />
                 <Board />
             </section>
         </React.Fragment>

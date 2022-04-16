@@ -6,7 +6,7 @@ import { AppRoute } from "../../const";
 const Archive = () => {
     return (
         <React.Fragment>
-            <Header mode={AppRoute.ARCHIVE}/>
+            <Header mode={AppRoute.ARCHIVE} />
             <section className="main__wrapper">
                 <Board />
             </section>
