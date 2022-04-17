@@ -1,9 +1,19 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const Event = () => {
+    const { id } = useParams();
+
+    const eventHeader = () => {
+        return id ? "Редактирование события" : "Добавление события";
+    }
+    const eventBtn = () => {
+        return id ? "Сохранить" : "Добавить";
+    }
+
     return (
         <form class="board__form">
-            <h2 class="board__title">Добавление события</h2>
+            <h2 class="board__title">{eventHeader()}</h2>
             <fieldset class="board__field board__field--theme">
                 <label for="theme" class="board__label board__label--theme">Тема:</label>
                 <textarea
@@ -31,7 +41,7 @@ const Event = () => {
                 />
             </fieldset>
             <div class="btns">
-                <button type="submit" class="btn-submit">Добавить</button>
+                <button type="submit" class="btn-submit">{eventBtn()}</button>
                 <button type="reset" class="btn-reset">Очистить</button>
             </div>
         </form>
