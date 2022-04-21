@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
 
-const CreateBtn = () => {
+const HomeBtn = () => {
     return (
-        <Link to={AppRoute.ADD}>
+        <Link to={AppRoute.MAIN}>
             <button
                 name="control"
-                className="btn-add"
-            >Создать
+                className="btn-home"
+            >Вернуться на главную
             </button>
         </Link>
     )
 };
 
-export default CreateBtn;
+export default HomeBtn;

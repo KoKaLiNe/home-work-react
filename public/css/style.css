@@ -80,7 +80,7 @@ body {
   font-weight: 600;
   padding: 15px 0;
 }
-.btn-add {
+.btn-add, .btn-home {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -102,6 +102,16 @@ body {
 }
 .btn-add:active {
   background-color: #da0808;
+}
+.btn-home {
+  top: 270px;
+  background-color: #1d4c69;
+}
+.btn-home:hover {
+  background-color: #143549;
+}
+.btn-home:active {
+  background-color: #143549;
 }
 .btn-submit {
   margin-right: 10px;
@@ -423,4 +433,10 @@ body {
   width: 100px;
   outline: none;
   border: 0;
+}
+
+.error404__text {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 100px;
 }
