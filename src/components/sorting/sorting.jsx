@@ -15,21 +15,21 @@ const Sorting = () => {
                 name="board-filter"
                 checked
                 />
-            <label for="board__filter-default" className="board__filter-label">По умолчанию</label>
+            <label htmlFor="board__filter-default" className="board__filter-label">По умолчанию</label>
             <input
                 type="radio"
                 id="board__filter-new"
                 className="board__filter visually-hidden"
                 name="board-filter"
                 />
-            <label for="board__filter-new" className="board__filter-label">Сначала новые</label>
+            <label htmlFor="board__filter-new" className="board__filter-label">Сначала новые</label>
             <input
                 type="radio"
                 id="board__filter-old"
                 className="board__filter visually-hidden"
                 name="board-filter"
                 />
-            <label for="board__filter-old" className="board__filter-label">Сначала старые</label>
+            <label htmlFor="board__filter-old" className="board__filter-label">Сначала старые</label>
         </div>
     )
 }

@@ -9,7 +9,7 @@ const Form = () => {
             <Header />
             <section className="main__wrapper">
                 <Filter />
-                <section class="board">
+                <section className="board">
                     <Event />
                 </section>
             </section>
