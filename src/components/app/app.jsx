@@ -5,24 +5,27 @@ import Archive from "../../pages/archive/archive";
 import Form from "../../pages/form/form";
 import Error404 from "../../pages/error404/error404";
 import { AppRoute } from "../../const";
+import { observer } from "mobx-react-lite";
 
-const App = ({events}) => {
+
+const App = observer(() => {
+
     return (
         <BrowserRouter>
             <Switch>
                 <Route path={AppRoute.MAIN} exact>
-                    <Main events={events}/>
+                    <Main />
                 </Route>
-                 <Route path={AppRoute.ARCHIVE} exact>
-                     <Archive events={events}/>
-                 </Route>
-                 <Route path={AppRoute.EVENT} exact>
-                     <Form events={events}/>
-                 </Route>
+                <Route path={AppRoute.ARCHIVE} exact>
+                    <Archive />
+                </Route>
+                <Route path={AppRoute.EVENT} exact>
+                    <Form />
+                </Route>
                 <Route component={Error404}></Route>
             </Switch>
         </BrowserRouter>
     )
-};
+});
 
 export default App;

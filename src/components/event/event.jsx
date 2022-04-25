@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { events } from "../../moсks";
+import { events } from "../../store/index";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 const Event = () => {
 
@@ -15,12 +16,12 @@ const Event = () => {
         return id ? "Сохранить" : "Добавить";
     }
 
-    const currentCard = events.find(x => x._id === id);
+    const currentCard = events.data.find(x => x._id === id);
 
     const [form, setForm] = React.useState({
-        theme: `${id && currentCard.theme || ''}`,
-        comment: `${id && currentCard.comment || ''}`,
-        date: `${id && moment(currentCard.date).format('YYYY-MM-DDThh:mm') || moment(new Date()).format('YYYY-MM-DDThh:mm')}`
+        theme: `${(id && currentCard.theme) || ''}`,
+        comment: `${(id && currentCard.comment) || ''}`,
+        date: `${(id && moment(currentCard.date).format('YYYY-MM-DDThh:mm')) || moment(new Date()).format('YYYY-MM-DDThh:mm')}`
     });
 
     const handleFieldChange = (evt) => {
@@ -28,13 +29,35 @@ const Event = () => {
         setForm({ ...form, [name]: value })
     }
 
+    const hist = useHistory();
+
     const handleSubmit = (evt) => {
-        evt.preventDefault();
-        console.log('submit form', form);
+        if (id) {
+            evt.preventDefault();
+            events.editEvent({
+                id: id,
+                theme: form.theme,
+                comment: form.comment,
+                date: form.date,
+                archive: currentCard.archive,
+                favorite: currentCard.favorite,
+            })
+            hist.goBack();
+        } else if (!id) {
+            evt.preventDefault();
+            events.addEvent({
+                theme: form.theme,
+                comment: form.comment,
+                date: form.date,
+                favorite: false,
+                archive: false,
+            })
+            hist.goBack();
+        }
     }
 
     return (
-        <form className="board__form" onSubmit={handleSubmit}>
+        <form className="board__form" >
             <h2 className="board__title">{eventHeader()}</h2>
             <fieldset className="board__field board__field--theme">
                 <label htmlFor="theme" className="board__label board__label--theme">Тема:</label>
@@ -70,7 +93,13 @@ const Event = () => {
                 />
             </fieldset>
             <div className="btns">
-                <button type="submit" className="btn-submit">{eventBtn()}</button>
+                <button
+                    type="submit"
+                    className="btn-submit"
+                    onClick={handleSubmit}
+                >
+                    {eventBtn()}
+                </button>
                 <button type="reset" className="btn-reset">Очистить</button>
             </div>
         </form>

@@ -1,0 +1,12 @@
+.delete-btn {
+    width: 30%;
+    color: #ff0000;
+}
+.delete-btn:hover {
+    background-color: #c94b4b;
+    color: #ffffff;
+}
+.delete-btn:focus {
+    background-color: #c94b4b;
+    color: #ffffff;
+}
