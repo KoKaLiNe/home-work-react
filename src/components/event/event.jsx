@@ -19,9 +19,9 @@ const Event = () => {
     const currentCard = events.data.find(x => x._id === id);
 
     const [form, setForm] = React.useState({
-        theme: `${(id && currentCard.theme) || ''}`,
-        comment: `${(id && currentCard.comment) || ''}`,
-        date: `${(id && moment(currentCard.date).format('YYYY-MM-DDThh:mm')) || moment(new Date()).format('YYYY-MM-DDThh:mm')}`
+        theme: (id && currentCard.theme) || '',
+        comment: (id && currentCard.comment) || '',
+        date: (id && moment(currentCard.date).format('YYYY-MM-DDThh:mm')) || moment(new Date()).format('YYYY-MM-DDThh:mm')
     });
 
     const handleFieldChange = (evt) => {

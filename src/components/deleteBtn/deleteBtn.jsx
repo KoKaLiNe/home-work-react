@@ -1,11 +1,8 @@
 import React from "react";
-import "./delete-btn.css"
+import "./deleteBtn.css"
 import { events } from "../../store/index";
 
-const Delete = () => {
-
-    // console.log(events)
-    // console.log(events.Event)
+const DeleteBtn = () => {
 
     const deletAllArchive = (evt) => {
 
@@ -27,4 +24,4 @@ const Delete = () => {
     )
 }
 
-export default Delete;
+export default DeleteBtn;

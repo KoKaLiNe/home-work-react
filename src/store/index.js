@@ -1,5 +1,6 @@
 import { computed, makeAutoObservable, onBecomeObserved } from 'mobx';
 import { getEvents, addEvent, editEvent, deleteEvent, deleteAllEvents } from '../api';
+import moment from 'moment';
 
 class EventStore {
     _id;
@@ -25,6 +26,7 @@ class EventStore {
 
 class EventsStore {
     data = [];
+    filteredData = [];
 
     constructor() {
         makeAutoObservable(this, {}, {
@@ -37,16 +39,47 @@ class EventsStore {
     }
 
     get archiveData() {
-        return this.data.map(event => new EventStore(event)).filter(x => x.archive)
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => x.archive)
     }
 
     get notArchiveData() {
-        return this.data.map(event => new EventStore(event)).filter(x => !x.archive)
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => !x.archive)
+    }
+
+    // Фильтр по датам
+
+    get pastData() {
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => moment(x.date).isBefore(moment(), 'day') && !x.archive);
+    }
+
+    get todayData() {
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => moment(x.date).isSame(moment(), 'day') && !x.archive);
+    }
+
+    get futureData() {
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => moment(x.date).isAfter(moment(), 'day') && !x.archive);
+    }
+
+    get favoriteFilter() {
+        return this.data
+            .map(event => new EventStore(event))
+            .filter(x => x.favorite && !x.archive)
     }
 
     *fetch() {
         const response = yield getEvents();
         this.data = response.map(event => new EventStore(event));
+        this.filteredData = response.map(event => new EventStore(event)).filter(x => !x.archive);
     }
 
     *addEvent(data) {
