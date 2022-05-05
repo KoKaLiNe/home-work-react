@@ -168,6 +168,7 @@ body {
 .board__filter-label {
   margin-right: 10px;
   font-size: 14px;
+  cursor: pointer;
 }
 .board__filter-label:hover {
   opacity: 0.7;

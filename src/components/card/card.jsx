@@ -5,30 +5,33 @@ import "moment/locale/ru"
 import "./card.css";
 import { events } from "../../store/index";
 
-const Card = ({ _id, theme, comment, date, archive, favorite}) => {
+const Card = ({ event }) => {
+
+    const { 
+        _id,
+        theme,
+        comment, 
+        date, 
+        archive, 
+        favorite,
+    } = event
 
     const formatDate = moment(date).format('DD MMMM');
 
     const handleToArchive = (evt) => {
         evt.preventDefault();
         events.editEvent({
+            ...event,
             id: _id,
-            theme,
-            comment,
-            date,
             archive: !archive,
-            favorite,
         })
     }
 
     const handleToFavorite = (evt) => {
         evt.preventDefault();
         events.editEvent({
+            ...event,
             id: _id,
-            theme,
-            comment,
-            date,
-            archive,
             favorite: !favorite,
         })
     }
