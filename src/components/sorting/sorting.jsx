@@ -1,27 +1,11 @@
 import React from "react";
 import { AppRoute } from "../../const";
 import { useLocation } from "react-router-dom";
-import { events } from "../../store";
 import { observer } from "mobx-react-lite";
-import { action } from "mobx";
-import moment from "moment";
 
-const Sorting = observer(() => {
+const Sorting = observer(({handleSorted}) => {
 
     const { pathname } = useLocation();
-
-    const defaultSorting = action(() => {
-        events.filteredData.sort((a, b) => parseInt(a._id, 16) - parseInt(b._id, 16))
-    })
-
-    const sortNewToOld = action(() => {
-     events.filteredData.sort((a, b) => moment(a.date) - moment(b.date))
-    })
-
-    const sortOldToNew = action(() => {
-        events.filteredData.sort((a, b) => moment(b.date) - moment(a.date))
-
-    })
 
     if (pathname === AppRoute.MAIN) {
         return (
@@ -33,7 +17,8 @@ const Sorting = observer(() => {
                     id="board__filter-default"
                     className="board__filter visually-hidden"
                     name="board-filter"
-                    onClick={defaultSorting}
+                    value={"sortDefault"}
+                    onClick={handleSorted}
                 />
                 <label htmlFor="board__filter-default" className="board__filter-label">По умолчанию</label>
                 <input
@@ -41,7 +26,8 @@ const Sorting = observer(() => {
                     id="board__filter-new"
                     className="board__filter visually-hidden"
                     name="board-filter"
-                    onClick={sortNewToOld}
+                    value={"sortNewToOld"}
+                    onClick={handleSorted}
                 />
                 <label htmlFor="board__filter-new" className="board__filter-label">Сначала новые</label>
                 <input
@@ -49,7 +35,8 @@ const Sorting = observer(() => {
                     id="board__filter-old"
                     className="board__filter visually-hidden"
                     name="board-filter"
-                    onClick={sortOldToNew}
+                    value={"sortOldToNew"}
+                    onClick={handleSorted}
                 />
                 <label htmlFor="board__filter-old" className="board__filter-label">Сначала старые</label>
             </div>
