@@ -4,9 +4,8 @@ import { AppRoute } from "../../const";
 import { useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { events } from "../../store/index";
-import { action } from "mobx";
 
-const Filter = observer(() => {
+const Filter = observer(({handleFiltered}) => {
 
     const { pathname } = useLocation();
     
@@ -22,9 +21,6 @@ const Filter = observer(() => {
         favoriteFilter,
     } = events;
 
-    const handleFiltered = action((e) => {
-        events.filteredData = events[e.target.value]
-    });
 
     return (
         <section className="main__filter filter">

@@ -9,7 +9,7 @@ import "./board.css";
 import { observer } from "mobx-react-lite";
 
 
-const Board = observer(({ events }) => {
+const Board = observer(({ events, handleSorted }) => {
 
     const { pathname } = useLocation();
 
@@ -25,9 +25,9 @@ const Board = observer(({ events }) => {
 
     return (
         <section className="board">
-            <Sorting />
+            <Sorting handleSorted={handleSorted} />
             <div className="board__events">
-                {events.slice(0, step).sort().map(event => <Card event={event} key={event._id} />)}
+                {events.slice(0, step).map(event => <Card event={event} key={event._id} />).sort()}
             </div>
             <div className="board__btn">
                 <LoadMore handleLoadMore={handleLoadMore} />
